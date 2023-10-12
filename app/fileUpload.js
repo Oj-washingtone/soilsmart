@@ -6,12 +6,13 @@ const selectImageBtn = document.querySelector("#select-image-btn");
 const attachBtn = document.querySelector("#attach");
 const welcomeMessageWrapper = document.querySelector(".welcome-message");
 const submitImageButton = document.querySelector("#submit-image-btn");
+const chatWrapperSection = document.querySelector(".chats-wrapper");
+const inputWrapper = document.querySelector(".chat-input-section");
 
 attachBtn.addEventListener("click", () => {
   dropArea.classList.toggle("hidden");
-  if (welcomeMessageWrapper.computedStyleMap.display !== "none") {
-    welcomeMessageWrapper.classList.toggle("hidden");
-  }
+  chatWrapperSection.classList.toggle("hidden");
+  inputWrapper.classList.toggle("hidden");
 });
 
 selectImageBtn.addEventListener("click", () => {

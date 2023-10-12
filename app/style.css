@@ -345,11 +345,13 @@ form {
   border-radius: 8px;
   padding: 20px;
   text-align: center;
-  height: 90%;
+  height: 90vh;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
+  margin: 20px auto;
+  margin-bottom: 0;
+  width: 90%;
 }
 
 #drop-area.highlight {
@@ -424,8 +426,6 @@ form {
   padding: 10px;
   border-bottom: 1px solid #9afdd4;
 }
-
-
 
 .questions-container {
   height: calc(100% - 60px);
