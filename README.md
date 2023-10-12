@@ -7,7 +7,7 @@ This project leverages the power of Generative AI to enhance soil analysis. By u
 ## Project Structure
 The project is organized as follows:
 
-##Purpose
+## Purpose
 SoilSmart Image Analysis serves the purpose of assisting agricultural and environmental experts in analyzing soil samples. By employing image analysis techniques and Generative AI, it offers the following benefits:
 
 Soil Quality Assessment: The project can assess soil quality based on image analysis, helping farmers and environmentalists make informed decisions about soil treatment and conservation.
