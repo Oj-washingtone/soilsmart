@@ -16,7 +16,7 @@
     "install": "^0.13.0",
     "markdown-it": "^13.0.2",
     "npm": "^10.1.0",
-    "replicate": "^0.18.0"
+    "replicate": "^0.18.1"
   },
   "devDependencies": {
     "tailwindcss": "^3.3.3"
