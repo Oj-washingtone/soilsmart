@@ -4,7 +4,7 @@ const apiToken = dotenv.config();
 
 class ReplicateResponseHandler {
   constructor() {
-    this.apiToken = "API_KEY";
+    this.apiToken = "r8_1wgJf2BRd9UMi9vYEGGLdYSzfvAu8jP3zMAkE";
     this.model =
       "meta/llama-2-70b-chat:02e509c789964a7ea8736978a43525956ef40397be9033abf9fd2badfe68c9e3";
   }
