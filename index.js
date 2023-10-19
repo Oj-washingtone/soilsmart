@@ -2,10 +2,6 @@ import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
-import Replicate from "replicate";
-import dotenv from "dotenv";
-import EventSource from "eventsource";
-const apiToken = dotenv.config();
 import routes from "./controller/routes.js";
 
 const app = express();

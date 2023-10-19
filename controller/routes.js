@@ -2,10 +2,9 @@ import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
-import Replicate from "replicate";
+// import Replicate from "replicate";
 import dotenv from "dotenv";
 import ReplicateResponseHandler from "../app/utils/EngageUser.js";
-import MarkdownIt from "markdown-it";
 
 const router = express.Router();
 
