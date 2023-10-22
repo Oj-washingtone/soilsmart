@@ -1,4 +1,4 @@
-import SoilAnalysis from "./utils/LocationBasedSoilProperties.js";
+import SoilAnalysis from "../utils/LocationBasedSoilProperties.js";
 
 const form = document.getElementById("chat-form");
 const responseDiv = document.getElementById("response");
@@ -12,7 +12,7 @@ const inputWrapper = document.querySelector(".chat-input-section");
 const loadingIndicator = document.getElementById("loadingIndicator");
 
 // Assuming questions.json is in the same directory as your HTML file
-fetch("utils/questionSuggestions.json")
+fetch("../utils/questionSuggestions.json")
   .then((response) => response.json())
   .then((data) => {
     const rightSidebar = document.querySelector(".right-sidebar");

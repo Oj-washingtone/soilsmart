@@ -4,11 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Soil Smart</title>
-    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="./style.css" />
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
     />
+
+    <script src="https://cdn.jsdelivr.net/npm/markdown-it@13.0.2/dist/markdown-it.min.js"></script>
+
     <!-- <script src="https://cdn.tailwindcss.com"></script> -->
   </head>
   <body>
@@ -54,7 +57,48 @@
       </div>
       <div class="main">
         <!-- <div class="top">top</div> -->
-        <div class="chats-wrapper"><div id="response"></div></div>
+        <div id="drop-area" class="hidden">
+          <div class="dropdown-wrapper">
+            <i class="bx bxs-cloud-upload upload-icon"></i>
+            <input type="file" id="fileInput" accept="image/*" />
+
+            <p>
+              Drag & Drop an image of your soil here or click to select one.
+            </p>
+            <button id="select-image-btn" class="upload-image-btn">
+              Select image to upload
+            </button>
+            <div class="preview-wrapper hidden">
+              <img id="preview" src="" alt="Preview" />
+            </div>
+
+            <button id="submit-image-btn" class="submit-image-btn hidden">
+              Analyze soil
+            </button>
+            <div id="loadingIndicator" class="nanalysis-indicator hidden">
+              Analysis ongoing...
+            </div>
+          </div>
+        </div>
+        <div class="chats-wrapper">
+          <div class="welcome-message">
+            <h1>Welcome to Soil Smart</h1>
+            <p>
+              Discover the secrets hidden beneath your soil's surface. Ask me
+              anything about soil analysis, nutrients, gardening tips, and more!
+              You can also upload an image of your soil and I'll analyze it for
+              you? You'll receive a detailed nutrients analysis and personalized
+              suggestions on how to improve your soil quality. Plus, I can
+              recommend crops that thrive in your specific soil type, helping
+              you achieve a bountiful harvest.
+            </p>
+            <p>
+              Let's dig in and cultivate a greener world together. How can I
+              assist you today?"
+            </p>
+          </div>
+          <div id="response"></div>
+        </div>
         <div class="chat-input-section">
           <div class="input-wrapper">
             <form
@@ -64,12 +108,14 @@
               enctype="application/json"
             >
               <textarea
-                name=""
-                id=""
-                cols="30"
-                placeholder="Type something..."
+                class="user-input"
                 name="message"
+                placeholder="Write your question..."
+                auttofocus="true"
               ></textarea>
+              <button type="button" id="attach" class="send-btn">
+                <i class="bx bx-paperclip"></i>
+              </button>
               <button type="submit" id="submit" class="send-btn">
                 <i class="bx bxs-send"></i>
               </button>
@@ -77,9 +123,14 @@
           </div>
         </div>
       </div>
-      <div class="right-sidebar">Trending</div>
+      <div class="right-sidebar">
+        <div class="top">
+          <h5>Here are some few topics you may be interested in</h5>
+        </div>
+      </div>
     </div>
 
-    <script type="module" src="../test.js"></script>
+    <script type="module" src="fileUpload.js"></script>
+    <script type="module" src="test.js"></script>
   </body>
 </html>
