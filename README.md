@@ -39,6 +39,10 @@ To get started with SoilSmart Image Analysis, follow these steps:
 
 ## Screenshots
 
+### Landing Page
+
+![Alt text](./screenshots/landing.png)
+
 ### screenshot 1
 
 ![Alt text](./screenshots/1.jpeg)
