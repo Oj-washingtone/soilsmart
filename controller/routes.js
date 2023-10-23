@@ -36,32 +36,37 @@ router.use(passport.session());
 
 // Passport configuration
 passport.serializeUser((user, done) => {
-  // Store only the user id in the session
-  done(null, user.id);
+  done(null, user._id.toString()); // Convert ObjectId to string
 });
 
-passport.deserializeUser((user, done) => {
-  done(null, user.id);
-});
-
-passport.use(
-  new LocalStrategy(
-    { usernameField: "email" },
-    async (email, password, done) => {
-      try {
-        const user = await account.loginUser(email, password);
-        console.log(user);
-        return done(null, user);
-      } catch (error) {
-        return done(null, false, { message: error.message });
-      }
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await account.findUserById(id); // Parse string back to ObjectId
+    if (!user) {
+      return done(new Error("User not found"), null);
     }
-  )
-);
+    done(null, user);
+  } catch (error) {
+    done(error, null);
+  }
+});
+
+// Midleware to ensure user is authenticated before accessing some parts
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  // User is not authenticated, redirect to the login page
+  res.redirect("/login");
+}
 
 router.get("/", (req, res) => {
-  const filePath = path.join(__dirname, "..", "app/src", "index.html");
-  res.sendFile(filePath);
+  if (req.session.isLoggedIn) {
+    res.redirect("/chats");
+  } else {
+    const filePath = path.join(__dirname, "..", "app/src", "index.html");
+    res.sendFile(filePath);
+  }
 });
 
 router.get("/register", (req, res) => {
@@ -76,8 +81,13 @@ router.get("/register", (req, res) => {
 });
 
 router.get("/login", (req, res) => {
-  const signin_page = path.join(__dirname, "..", "app/src", "login.html");
-  res.sendFile(signin_page);
+  if (req.session.isLoggedIn) {
+    // User is already authenticated, redirect to /chats
+    res.redirect("/chats");
+  } else {
+    const signin_page = path.join(__dirname, "..", "app/src", "login.html");
+    res.sendFile(signin_page);
+  }
 });
 
 router.get("/signup", (req, res) => {
@@ -85,7 +95,7 @@ router.get("/signup", (req, res) => {
   res.sendFile(signin_page);
 });
 
-router.get("/chats", (req, res) => {
+router.get("/chats", ensureAuthenticated, (req, res) => {
   const chat_page = path.join(__dirname, "..", "app/src", "chat.html");
   res.sendFile(chat_page);
 });
@@ -111,7 +121,10 @@ router.post("/userreg", async (req, res) => {
     req.login(user, (err) => {
       if (err) {
         console.log(err);
+        return;
       }
+
+      req.session.isLoggedIn = true;
       res.redirect("/chats");
     });
   } catch (error) {
@@ -120,8 +133,22 @@ router.post("/userreg", async (req, res) => {
 });
 
 // Login route
+passport.use(
+  new LocalStrategy(
+    { usernameField: "email" },
+    async (email, password, done) => {
+      try {
+        const user = await account.loginUser(email, password);
+        return done(null, user);
+      } catch (error) {
+        return done(null, false, { message: error.message });
+      }
+    }
+  )
+);
 
-router.post("/login", passport.authenticate("local"), (req, res) => {
+router.post("/signin", passport.authenticate("local"), (req, res) => {
+  req.session.isLoggedIn = true;
   res.redirect("/chats");
 });
 

@@ -24,6 +24,9 @@ class Account {
 
       // Save the user to the database
       await user.save();
+
+      // Return the registered user object
+      return user;
     } catch (error) {
       throw new Error("User registration failed: " + error.message);
     }
@@ -48,8 +51,6 @@ class Account {
         throw new Error("Invalid password");
       }
 
-      console.log(user);
-
       return user; // Return the logged-in user object
     } catch (error) {
       throw new Error("Login failed: " + error.message);
@@ -65,6 +66,15 @@ class Account {
   // Helper method to compare passwords
   async comparePassword(inputPassword, hashedPassword) {
     return bcrypt.compare(inputPassword, hashedPassword);
+  }
+
+  async findUserById(id) {
+    try {
+      const user = await User.findById(id);
+      return user;
+    } catch (error) {
+      throw new Error("User not found: " + error.message);
+    }
   }
 }
 
