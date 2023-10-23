@@ -37,11 +37,11 @@ router.use(passport.session());
 // Passport configuration
 passport.serializeUser((user, done) => {
   // Store only the user id in the session
-  done(null, user.email);
+  done(null, user.id);
 });
 
 passport.deserializeUser((user, done) => {
-  done(null, user.email);
+  done(null, user.id);
 });
 
 router.get("/", (req, res) => {
@@ -71,7 +71,7 @@ router.get("/signup", (req, res) => {
 });
 
 router.get("/chats", (req, res) => {
-  const chat_page = path.join(__dirname, "..", "app/chat", "chat.html");
+  const chat_page = path.join(__dirname, "..", "app/src", "chat.html");
   res.sendFile(chat_page);
 });
 
@@ -111,6 +111,7 @@ passport.use(
     async (email, password, done) => {
       try {
         const user = await userManager.loginUser(email, password);
+        console.log(user);
         return done(null, user);
       } catch (error) {
         return done(null, false, { message: error.message });

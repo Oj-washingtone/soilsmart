@@ -3,7 +3,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 import routes from "./controller/routes.js";
-// import db from "./controller/databaseConfig.js";
+import db from "./controller/databaseConfig.js";
 import bodyParser from "body-parser";
 
 const app = express();
