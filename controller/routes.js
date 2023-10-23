@@ -44,6 +44,21 @@ passport.deserializeUser((user, done) => {
   done(null, user.id);
 });
 
+passport.use(
+  new LocalStrategy(
+    { usernameField: "email" },
+    async (email, password, done) => {
+      try {
+        const user = await account.loginUser(email, password);
+        console.log(user);
+        return done(null, user);
+      } catch (error) {
+        return done(null, false, { message: error.message });
+      }
+    }
+  )
+);
+
 router.get("/", (req, res) => {
   const filePath = path.join(__dirname, "..", "app/src", "index.html");
   res.sendFile(filePath);
@@ -105,20 +120,6 @@ router.post("/userreg", async (req, res) => {
 });
 
 // Login route
-passport.use(
-  new LocalStrategy(
-    { usernameField: "email" },
-    async (email, password, done) => {
-      try {
-        const user = await userManager.loginUser(email, password);
-        console.log(user);
-        return done(null, user);
-      } catch (error) {
-        return done(null, false, { message: error.message });
-      }
-    }
-  )
-);
 
 router.post("/login", passport.authenticate("local"), (req, res) => {
   res.redirect("/chats");

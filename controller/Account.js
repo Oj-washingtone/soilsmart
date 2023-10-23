@@ -48,6 +48,8 @@ class Account {
         throw new Error("Invalid password");
       }
 
+      console.log(user);
+
       return user; // Return the logged-in user object
     } catch (error) {
       throw new Error("Login failed: " + error.message);

@@ -1,4 +1,4 @@
-import SoilAnalysis from "../utils/LocationBasedSoilProperties.js";
+import SoilAnalysis from "../../../utils/LocationBasedSoilProperties.js";
 
 const form = document.getElementById("chat-form");
 const responseDiv = document.getElementById("response");
