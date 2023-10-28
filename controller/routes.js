@@ -143,18 +143,20 @@ router.post("/userreg", async (req, res) => {
   try {
     const user = await account.registerUser(fullName, email, password);
     // init new messages for user
-    const chat = await messages.initChat(req.user._id);
+    // const chat = await messages.initChat(req.user._id);
 
     // if user is created successfully, log them in
-    req.login(user, (err) => {
-      if (err) {
-        console.log(err);
-        return;
-      }
+    // req.login(user, (err) => {
+    //   if (err) {
+    //     console.log(err);
+    //     return;
+    //   }
 
-      req.session.isLoggedIn = true;
-      res.redirect("/chats?=" + chat);
-    });
+    //   req.session.isLoggedIn = true;
+    //   res.redirect("/signin");
+    // });
+
+    res.redirect("/signin");
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
