@@ -687,4 +687,8 @@ div.right-panel img {
     top: 60px !important;
     height: calc(100vh - 60px) !important;
   }
+
+  .toggle-menu-btn {
+    display: none;
+  }
 }
