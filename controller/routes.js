@@ -142,21 +142,19 @@ router.post("/userreg", async (req, res) => {
 
   try {
     const user = await account.registerUser(fullName, email, password);
-    // init new messages for user
-    // const chat = await messages.initChat(req.user._id);
 
     // if user is created successfully, log them in
-    // req.login(user, (err) => {
-    //   if (err) {
-    //     console.log(err);
-    //     return;
-    //   }
+    req.login(user, async (err) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
 
-    //   req.session.isLoggedIn = true;
-    //   res.redirect("/signin");
-    // });
-
-    res.redirect("/signin");
+      req.session.isLoggedIn = true;
+      // init new chat
+      const chat = await messages.initChat(req.user._id);
+      res.redirect("/chats?=" + chat);
+    });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
