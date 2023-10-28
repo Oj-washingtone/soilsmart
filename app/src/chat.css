@@ -687,20 +687,4 @@ div.right-panel img {
     top: 60px !important;
     height: calc(100vh - 60px) !important;
   }
-
-  .toggle-menu-btn {
-    display: none;
-  }
-
-  .floating-action-button {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    z-index: 100;
-    background-color: #20c997;
-    color: #fff;
-    border: 1px solid #20c997;
-    outline: none;
-    border-radius: 5px;
-  }
 }
