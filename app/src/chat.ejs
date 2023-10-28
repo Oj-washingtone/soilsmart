@@ -85,7 +85,7 @@
           </div>
           <div><h3>Soil Smart</h3></div>
           <div>
-            <button class="more-btn" role="button" id="toggle-menu-btn">
+            <button class="more-btn" role="button" id="more-options-btn">
               <i class="bx bx-dots-vertical-rounded"></i>
             </button>
           </div>
@@ -171,5 +171,28 @@
 
     <script type="module" src="assets/js/fileUpload.js"></script>
     <script type="module" src="assets/js/test.js"></script>
+    <script>
+      const open_menu_small = document.querySelector("#open-menu-small");
+      const more_options_btn = document.querySelector("#more-options-btn");
+
+      open_menu_small.addEventListener("click", () => {
+        const leftSidebar = document.querySelector(".left-sidebar");
+        if (leftSidebar.style.display === "none") {
+          leftSidebar.style.display = "block";
+        } else {
+          leftSidebar.style.display = "none";
+        }
+      });
+
+      more_options_btn.addEventListener("click", () => {
+        const rightSidebar = document.querySelector(".right-sidebar");
+
+        if (rightSidebar.style.display === "none") {
+          rightSidebar.style.display = "block";
+        } else {
+          rightSidebar.style.display = "none";
+        }
+      });
+    </script>
   </body>
 </html>

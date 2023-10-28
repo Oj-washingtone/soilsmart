@@ -14,8 +14,6 @@ const soil_analysis_shortcut_btn = document.querySelector(
   "#soil_analysis_shortcut_btn"
 );
 
-const open_menu_small = document.querySelector("#open-menu-small");
-
 // Assuming questions.json is in the same directory as your HTML file
 fetch("../utils/questionSuggestions.json")
   .then((response) => response.json())
@@ -182,8 +180,3 @@ function formatMessage(rawText) {
   const markdown = new markdownit();
   return markdown.render(rawText);
 }
-
-open_menu_small.addEventListener("click", () => {
-  const leftSidebar = document.querySelector(".left-sidebar");
-  leftSidebar.classList.toggle("hidden");
-});
