@@ -631,6 +631,10 @@ div.right-panel img {
   font-size: 20px;
 }
 
+.main-top {
+  display: none;
+}
+
 @media (max-width: 850px) {
   .left-sidebar {
     display: none;
@@ -646,6 +650,16 @@ div.right-panel img {
 
   .main-top {
     display: flex !important;
-    background-color: #fff !important;
+    background-color: #20c997 !important;
+    padding: 10px;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .chat-input-section {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
   }
 }
