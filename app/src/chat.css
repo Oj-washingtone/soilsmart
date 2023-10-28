@@ -662,4 +662,14 @@ div.right-panel img {
     left: 0;
     width: 100%;
   }
+
+  .more-btn {
+    background-color: inherit;
+    outline: none;
+    border: none !important;
+  }
+  .more-btn i {
+    color: #fff;
+    font-size: 25px;
+  }
 }
