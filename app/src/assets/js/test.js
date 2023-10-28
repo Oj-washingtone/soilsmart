@@ -10,6 +10,9 @@ const submit_image_btn = document.querySelector("#submit-image-btn");
 const chatWrapperSection = document.querySelector(".chats-wrapper");
 const inputWrapper = document.querySelector(".chat-input-section");
 const loadingIndicator = document.getElementById("loadingIndicator");
+const soil_analysis_shortcut_btn = document.querySelector(
+  "#soil_analysis_shortcut_btn"
+);
 
 // Assuming questions.json is in the same directory as your HTML file
 fetch("../utils/questionSuggestions.json")
@@ -48,6 +51,7 @@ form.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   const userInput = event.target.elements.message.value;
+  const chatId = event.target.elements.chatId.value;
 
   // check if user input is empty if so return
   if (userInput === "") return;
@@ -77,7 +81,7 @@ form.addEventListener("submit", async (event) => {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ message: userInput }),
+    body: JSON.stringify({ message: userInput, chatId: chatId }),
   });
 
   const responseData = await response.json();
@@ -117,6 +121,18 @@ form.addEventListener("submit", async (event) => {
 
     source.addEventListener("done", (e) => {
       source.close();
+      const botMessage = responseElement.innerText;
+      
+      fetch("/save/bot/message", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ botMessage: botMessage, chatId: chatId }),
+      }).then((response) => {
+        console.log(response);
+      });
+
       console.log("done", JSON.parse(e.data));
     });
   }
@@ -125,7 +141,14 @@ form.addEventListener("submit", async (event) => {
 });
 
 // file upload
+
 const dropArea = document.getElementById("drop-area");
+
+soil_analysis_shortcut_btn.addEventListener("click", () => {
+  dropArea.classList.toggle("hidden");
+  chatWrapperSection.classList.toggle("hidden");
+  inputWrapper.classList.toggle("hidden");
+});
 
 submit_image_btn.addEventListener("click", async (event) => {
   loadingIndicator.classList.toggle("hidden");

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Soil Smart</title>
+    <link rel="stylesheet" href="chat.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/markdown-it@13.0.2/dist/markdown-it.min.js"></script>
+
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+  </head>
+  <body>
+    <div class="container">
+      <div class="left-sidebar">
+        <div class="Chat-history sidebar-sections">
+          <div class="top-history">
+            <button class="button-42" role="button" id="ne-message-btn">
+              New message
+            </button>
+            <button class="toggle-menu-btn" role="button" id="toggle-menu-btn">
+              <i class="bx bx-menu"></i>
+            </button>
+          </div>
+          <h6>Previous Chats:</h6>
+          <hr />
+
+          <div class="chat-history">
+            <% let allThreadsEmpty = true; %> <% if (previousMessages.length >
+            0) { %> <% previousMessages.forEach(prevChat => { %> <% if
+            (prevChat.thread.length > 0) { %>
+            <div class="history-message">
+              <div class="chat-item-img">
+                <i class="bx bxs-message-rounded"></i>
+              </div>
+              <div class="chat-item-details">
+                <p>
+                  <a href="/chats?id=<%= prevChat._id %>"
+                    ><%= prevChat.thread[0].message %></a
+                  >
+                </p>
+                <!-- Render the first message -->
+              </div>
+            </div>
+            <% allThreadsEmpty = false; %> <% } %> <% }); %> <% if
+            (allThreadsEmpty) { %>
+            <div class="shortcut_section">
+              <div class="soil_analysis_shortcut shortcut">
+                <div class="shortcut_image">
+                  <img src="assets/img/soil.jpg" alt="" />
+                </div>
+                <p class="action-discription">
+                  Get a comprehensive analysis of your soil health
+                </p>
+                <button id="soil_analysis_shortcut_btn" class="button-shortcut">
+                  Analyze soil
+                </button>
+              </div>
+              <div class="crop_analysis_shortcut shortcut">
+                <div class="shortcut_image">
+                  <img src="assets/img/crop.jpg" alt="" />
+                </div>
+                <p class="action-discription">
+                  Get to identify diseases on your crop
+                </p>
+                <button class="button-shortcut">Analyze crop disease</button>
+              </div>
+            </div>
+            <% } %> <% } else { %>
+            <p>No previous messages available.</p>
+            <% } %>
+          </div>
+        </div>
+      </div>
+      <div class="main">
+        <!-- <div class="top">top</div> -->
+        <div id="drop-area" class="hidden">
+          <div class="dropdown-wrapper">
+            <i class="bx bxs-cloud-upload upload-icon"></i>
+            <input type="file" id="fileInput" accept="image/*" />
+
+            <p>
+              Drag & Drop an image of your soil here or click to select one.
+            </p>
+            <button id="select-image-btn" class="upload-image-btn">
+              Select image to upload
+            </button>
+            <div class="preview-wrapper hidden">
+              <img id="preview" src="" alt="Preview" />
+            </div>
+
+            <button id="submit-image-btn" class="submit-image-btn hidden">
+              Analyze soil
+            </button>
+            <div id="loadingIndicator" class="nanalysis-indicator hidden">
+              Analysis ongoing...
+            </div>
+          </div>
+        </div>
+        <div class="chats-wrapper">
+          <% if (chat.thread && chat.thread.length > 0) { %>
+          <ul>
+            <% chat.thread.forEach(message => { %>
+            <div class="message-container">
+              <% if (message.sender === 'user') { %>
+              <img src="../assets/images/user.jpg" class="message-image" />
+              <p class="message-sent message"><%= message.message %></p>
+              <% } else if (message.sender === 'bot') { %>
+              <img src="../assets/images/bot.png" class="message-image" />
+              <p class="system-message message"><%= message.message %></p>
+              <% } else { %>
+              <p class="other-sender-message message"><%= message.message %></p>
+              <% } %>
+            </div>
+            <% }); %>
+          </ul>
+          <% } else { %>
+          <div class="welcome-message">
+            <h1>Soil Smart</h1>
+            <p>How to use the platform</p>
+          </div>
+          <% } %>
+        </div>
+        <div class="chat-input-section">
+          <div class="input-wrapper">
+            <form
+              id="chat-form"
+              action="/chat"
+              method="POST"
+              enctype="application/json"
+            >
+              <input type="hidden" name="chatId" value="<%= chat._id %>" />
+              <textarea
+                class="user-input"
+                name="message"
+                placeholder="Write your question..."
+                auttofocus="true"
+              ></textarea>
+              <button type="button" id="attach" class="send-btn">
+                <i class="bx bx-paperclip"></i>
+              </button>
+              <button type="submit" id="submit" class="send-btn">
+                <i class="bx bxs-send"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="right-sidebar">
+        <div class="top">
+          <h5>Here are some few topics you may be interested in</h5>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="assets/js/fileUpload.js"></script>
+    <script type="module" src="assets/js/test.js"></script>
+  </body>
+</html>

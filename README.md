@@ -37,6 +37,10 @@ To get started with SoilSmart Image Analysis, follow these steps:
 2. Run `npm install` to install all the required packages
 3. Launch the application by going to the root folder for the project and running ` node index.js` then navigate to your browser and visit `http://localhost:3000` to access the web application
 
+## Background on data set creation
+
+Background for dataset selection
+
 ## Screenshots
 
 ### Landing Page

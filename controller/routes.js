@@ -8,9 +8,12 @@ import session from "express-session";
 import passport from "passport";
 import LocalStrategy from "passport-local";
 import Account from "./Account.js";
+import Messages from "./Messages.js";
+import EventSource from "eventsource";
 
 const router = express.Router();
 const account = new Account();
+const messages = new Messages();
 
 const apiToken = dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
@@ -95,20 +98,43 @@ router.get("/signup", (req, res) => {
   res.sendFile(signin_page);
 });
 
-router.get("/chats", ensureAuthenticated, (req, res) => {
-  const chat_page = path.join(__dirname, "..", "app/src", "chat.html");
-  res.sendFile(chat_page);
+router.get("/chats", ensureAuthenticated, async (req, res) => {
+  const chatId = req.query.id;
+
+  try {
+    // get current chat
+    const chat = await messages.getCurrentChat(req.user._id, chatId);
+    const previousMessages = await messages.getAllMessages(req.user._id);
+
+    res.render("chat", { chat, previousMessages });
+  } catch (error) {
+    // catch errors and render 404.ejs
+    res.status(404).render("404");
+  }
 });
 
 router.post("/chat", async (req, res) => {
   const userInput = req.body.message;
+  const chatId = req.body.chatId;
+
+  // Save user message
+  await messages.saveMessage("user", userInput, chatId);
 
   const replicateHandler = new ReplicateResponseHandler();
-
   const prediction = await replicateHandler.getResponse(userInput);
 
   res.json(prediction);
-  res.end();
+});
+
+// post endpoint to save bot message as sent from client side
+router.post("/save/bot/message", async (req, res) => {
+  const botMessage = req.body.botMessage;
+  const chatId = req.body.chatId;
+
+  // Save bot message
+  await messages.saveMessage("bot", botMessage, chatId);
+
+  res.json({ message: "success" });
 });
 
 router.post("/userreg", async (req, res) => {
@@ -116,6 +142,8 @@ router.post("/userreg", async (req, res) => {
 
   try {
     const user = await account.registerUser(fullName, email, password);
+    // init new messages for user
+    const chat = await messages.initChat(req.user._id);
 
     // if user is created successfully, log them in
     req.login(user, (err) => {
@@ -125,7 +153,7 @@ router.post("/userreg", async (req, res) => {
       }
 
       req.session.isLoggedIn = true;
-      res.redirect("/chats");
+      res.redirect("/chats?=" + chat);
     });
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -147,9 +175,12 @@ passport.use(
   )
 );
 
-router.post("/signin", passport.authenticate("local"), (req, res) => {
+router.post("/signin", passport.authenticate("local"), async (req, res) => {
+  // init new messages for user
+  const chat = await messages.initChat(req.user._id);
+
   req.session.isLoggedIn = true;
-  res.redirect("/chats");
+  res.redirect("/chats?id=" + chat);
 });
 
 export default router;
