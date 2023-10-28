@@ -681,4 +681,10 @@ div.right-panel img {
   .left-sidebar {
     position: absolute;
   }
+
+  /* Left sidebar to be below the top */
+  .left-sidebar {
+    top: 60px !important;
+    height: calc(100vh - 60px) !important;
+  }
 }
