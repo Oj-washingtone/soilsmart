@@ -706,4 +706,17 @@ div.right-panel img {
     height: calc(100vh - 60px) !important;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   }
+
+  .upload-image-btn {
+    font-size: 16px;
+  }
+
+  .cancel-btn {
+    font-size: 16px;
+    background-color: inherit;
+    border: none;
+    outline: none;
+    color: red;
+    margin-top: 60px;
+  }
 }
