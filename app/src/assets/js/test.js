@@ -71,7 +71,10 @@ form.addEventListener("submit", async (event) => {
   messageContainer.appendChild(messageElement);
 
   // hide welcome message
-  welcomeMessage.style.display = "none";
+  if (welcomeMessage) {
+    welcomeMessage.style.display = "none";
+  }
+
   chatsWrapper.appendChild(messageContainer);
   event.target.elements.message.value = "";
   chatsWrapper.scrollTop = chatsWrapper.scrollHeight;
