@@ -687,4 +687,22 @@ div.right-panel img {
     top: 60px !important;
     height: calc(100vh - 60px) !important;
   }
+
+  .btn-lg-screen {
+    display: none;
+  }
+
+  .chats-wrapper {
+    padding-top: 80px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 100%;
+  }
+
+  /* Right sidebar below the header */
+  .right-sidebar {
+    top: 60px !important;
+    height: calc(100vh - 60px) !important;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  }
 }
