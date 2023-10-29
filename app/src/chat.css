@@ -661,6 +661,15 @@ div.right-panel img {
   color: #000;
 }
 
+.cancel-btn {
+  font-size: 16px;
+  background-color: inherit;
+  border: none;
+  outline: none;
+  color: red;
+  margin-top: 60px;
+}
+
 @media (max-width: 850px) {
   .left-sidebar {
     display: none;
@@ -735,15 +744,6 @@ div.right-panel img {
 
   .upload-image-btn {
     font-size: 16px;
-  }
-
-  .cancel-btn {
-    font-size: 16px;
-    background-color: inherit;
-    border: none;
-    outline: none;
-    color: red;
-    margin-top: 60px;
   }
 
   #new-message-btn {

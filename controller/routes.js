@@ -113,6 +113,17 @@ router.get("/chats", ensureAuthenticated, async (req, res) => {
   }
 });
 
+router.post("/new-chat", ensureAuthenticated, async (req, res) => {
+  try {
+    // Initialize a new chat
+    const chat = await messages.initChat(req.user._id);
+    res.redirect("/chats?id=" + chat);
+  } catch (error) {
+    // Handle errors, e.g., render an error page
+    res.status(500).render("error", { error });
+  }
+});
+
 router.post("/chat", async (req, res) => {
   const userInput = req.body.message;
   const chatId = req.body.chatId;

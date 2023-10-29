@@ -14,6 +14,7 @@ const soil_analysis_shortcut_btn = document.querySelector(
   "#soil_analysis_shortcut_btn"
 );
 let floatingActionBtn = document.querySelector("#fab");
+const new_message_btn = document.querySelector("#new-message-btn");
 
 // Assuming questions.json is in the same directory as your HTML file
 fetch("../utils/questionSuggestions.json")
@@ -186,4 +187,21 @@ What are some suitable plantsto grow, an how would i improve my soil quality to 
 function formatMessage(rawText) {
   const markdown = new markdownit();
   return markdown.render(rawText);
+}
+
+new_message_btn.addEventListener("click", createNewMessage);
+floatingActionBtn.addEventListener("click", createNewMessage);
+
+function createNewMessage() {
+  fetch("/new-chat", {
+    method: "POST",
+  })
+    .then((response) => {
+      if (response.redirected) {
+        window.location.href = response.url;
+      }
+    })
+    .catch((error) => {
+      console.error("Error creating a new chat:", error);
+    });
 }
