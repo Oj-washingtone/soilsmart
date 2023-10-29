@@ -144,11 +144,13 @@ form.addEventListener("submit", async (event) => {
 
 const dropArea = document.getElementById("drop-area");
 
-soil_analysis_shortcut_btn.addEventListener("click", () => {
-  dropArea.classList.toggle("hidden");
-  chatWrapperSection.classList.toggle("hidden");
-  inputWrapper.classList.toggle("hidden");
-});
+if (soil_analysis_shortcut_btn) {
+  soil_analysis_shortcut_btn.addEventListener("click", () => {
+    dropArea.classList.toggle("hidden");
+    chatWrapperSection.classList.toggle("hidden");
+    inputWrapper.classList.toggle("hidden");
+  });
+}
 
 submit_image_btn.addEventListener("click", async (event) => {
   loadingIndicator.classList.toggle("hidden");
