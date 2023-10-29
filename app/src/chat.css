@@ -635,6 +635,10 @@ div.right-panel img {
   display: none;
 }
 
+.floating-action-btn {
+  display: none;
+}
+
 @media (max-width: 850px) {
   .left-sidebar {
     display: none;
@@ -718,5 +722,27 @@ div.right-panel img {
     outline: none;
     color: red;
     margin-top: 60px;
+  }
+
+  #new-message-btn {
+    display: none;
+  }
+
+  .floating-action-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: #20c997;
+    color: #fff;
+    font-size: 20px;
+    position: fixed;
+    bottom: 120px;
+    right: 20px;
+    border: 1px solid #20c997;
+    outline: none;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   }
 }
