@@ -13,6 +13,7 @@ const loadingIndicator = document.getElementById("loadingIndicator");
 const soil_analysis_shortcut_btn = document.querySelector(
   "#soil_analysis_shortcut_btn"
 );
+let floatingActionBtn = document.querySelector("#fab");
 
 // Assuming questions.json is in the same directory as your HTML file
 fetch("../utils/questionSuggestions.json")
@@ -162,6 +163,7 @@ submit_image_btn.addEventListener("click", async (event) => {
   const soilAnalysis = new SoilAnalysis();
   const soilProperties = await soilAnalysis.getLocation();
   dropArea.classList.toggle("hidden");
+  floatingActionBtn.style.display = "flex";
   chatWrapperSection.classList.toggle("hidden");
   inputWrapper.classList.toggle("hidden");
 

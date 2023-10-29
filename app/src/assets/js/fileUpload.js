@@ -8,11 +8,21 @@ const welcomeMessageWrapper = document.querySelector(".welcome-message");
 const submitImageButton = document.querySelector("#submit-image-btn");
 const chatWrapperSection = document.querySelector(".chats-wrapper");
 const inputWrapper = document.querySelector(".chat-input-section");
+let floatingActionBtn = document.querySelector("#fab");
+const cancelBtn = document.querySelector("#cancel-btn");
 
 attachBtn.addEventListener("click", () => {
   dropArea.classList.toggle("hidden");
   chatWrapperSection.classList.toggle("hidden");
   inputWrapper.classList.toggle("hidden");
+  floatingActionBtn.style.display = "none";
+});
+
+cancelBtn.addEventListener("click", () => {
+  dropArea.classList.toggle("hidden");
+  chatWrapperSection.classList.toggle("hidden");
+  inputWrapper.classList.toggle("hidden");
+  floatingActionBtn.style.display = "flex";
 });
 
 selectImageBtn.addEventListener("click", () => {
