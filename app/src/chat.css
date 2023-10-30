@@ -163,11 +163,11 @@ body {
 }
 
 .chats-wrapper {
-  width: 100%;
+  width: 90%;
   background-color: #fff;
   height: calc(100% - 100px);
   overflow-y: auto;
-  padding: 0 5%;
+  padding: 0 20px;
   overflow-x: hidden;
   margin: 0 auto;
 }
@@ -199,7 +199,7 @@ form {
   width: 100%;
 }
 .user-input {
-  width: calc(100% - 100px) !important;
+  width: calc(100% - 150px) !important;
   border: none;
   background: transparent;
   outline: none;
@@ -210,6 +210,11 @@ form {
   height: 100%;
   padding: 10px;
   height: 40px;
+}
+
+.crop-disease i {
+  font-size: 20px;
+  color: gray;
 }
 #attach {
   color: gray !important;
