@@ -231,7 +231,7 @@ submit_crop_image_btn.addEventListener("click", async (event) => {
 
         if (response.ok) {
           const responseData = await response.json();
-          console.log("Disease identification response:", responseData);
+          //console.log("Disease identification response:", responseData);
           // You can handle the disease identification results here
           dropArea2.classList.toggle("hidden");
           loadingIndicator.classList.toggle("hidden");
