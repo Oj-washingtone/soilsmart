@@ -161,10 +161,11 @@ router.post("/userreg", async (req, res) => {
         return;
       }
 
-      req.session.isLoggedIn = true;
       // init new chat
-      const chat = await messages.initChat(req.user._id);
-      res.redirect("/chats?=" + chat);
+      const chat = await messages.initChat(user._id);
+
+      req.session.isLoggedIn = true;
+      res.redirect("/chats?id=" + chat);
     });
   } catch (error) {
     res.status(400).json({ error: error.message });
