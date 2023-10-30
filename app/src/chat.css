@@ -389,6 +389,7 @@ form {
   cursor: pointer;
   margin-top: 40px;
 }
+
 .question {
   padding: 10px;
   border-bottom: 1px solid #9afdd4;
@@ -437,6 +438,86 @@ form {
 
 .button-42:hover {
   box-shadow: #9eecd5 0 3px 8px;
+}
+
+#drop-area-2 {
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+#drop-area-2 .highlight {
+  background-color: #f1f1f1;
+}
+
+#drop-area-2 .hidden {
+  display: none;
+}
+
+#drop-area-2 .upload-icon {
+  font-size: 60px;
+  color: #9afdd4;
+}
+
+#drop-area-2 .dropdown-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+#drop-area-2 .dropdown-wrapper p {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  margin-top: 20px;
+}
+
+#drop-area-2 #fileInput {
+  visibility: hidden;
+}
+
+#drop-area-2 .upload-image-btn {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #34eb9e;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+#drop-area-2 .preview-wrapper {
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  margin-top: 20px;
+}
+
+#drop-area-2 .preview-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  border-radius: inherit;
+}
+
+#drop-area-2 .submit-image-btn {
+  height: 40px;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #9afdd4;
+  color: #000;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin-top: 40px;
 }
 
 /* .history-message {

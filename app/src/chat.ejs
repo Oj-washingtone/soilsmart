@@ -101,10 +101,6 @@
           <div class="dropdown-wrapper">
             <i class="bx bxs-cloud-upload upload-icon"></i>
             <input type="file" id="fileInput" accept="image/*" />
-
-            <p>
-              Drag & Drop an image of your soil here or click to select one.
-            </p>
             <button id="select-image-btn" class="upload-image-btn">
               Select image to upload
             </button>
@@ -129,6 +125,35 @@
             <button id="cancel-btn" class="cancel-btn">Close</button>
           </div>
         </div>
+
+        <div id="drop-area-2" class="hidden">
+          <div class="dropdown-wrapper">
+            <i class="bx bxs-cloud-upload upload-icon"></i>
+            <input type="file" id="fileInput-2" accept="image/*" />
+            <p>Drag & Drop an image here or click to select one.</p>
+            <button id="select-image-btn-2" class="upload-image-btn">
+              Select image to upload
+            </button>
+            <div class="preview-wrapper hidden">
+              <img id="preview-2" src="" alt="Preview" />
+            </div>
+            <button id="submit-image-btn-2" class="submit-image-btn hidden">
+              Analyze crop
+            </button>
+            <div id="loadingIndicator-2" class="nanalysis-indicator hidden">
+              <div class="indicator">
+                <img
+                  src="assets/img/loading.gif"
+                  alt=""
+                  class="loading-spinner"
+                />
+                <p>Processing...</p>
+              </div>
+            </div>
+            <button id="cancel-btn-2" class="cancel-btn">Close</button>
+          </div>
+        </div>
+
         <div class="chats-wrapper">
           <% if (chat.thread && chat.thread.length > 0) { %>
           <ul>
@@ -171,7 +196,11 @@
                 placeholder="Write your question..."
                 auttofocus="true"
               ></textarea>
-              <button type="button" id="crop-disease" class="send-btn crop-disease">
+              <button
+                type="button"
+                id="crop-disease-btn"
+                class="send-btn crop-disease"
+              >
                 <i class="bx bxs-leaf"></i>
               </button>
               <button type="button" id="attach" class="send-btn">

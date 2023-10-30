@@ -10,6 +10,7 @@ import LocalStrategy from "passport-local";
 import Account from "./Account.js";
 import Messages from "./Messages.js";
 import EventSource from "eventsource";
+import fs from "fs";
 
 const router = express.Router();
 const account = new Account();
@@ -206,7 +207,5 @@ router.get("/logout", (req, res) => {
     res.redirect("/");
   });
 });
-
-
 
 export default router;

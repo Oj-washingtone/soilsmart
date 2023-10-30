@@ -183,6 +183,134 @@ What are some suitable plantsto grow, an how would i improve my soil quality to 
   submit_image_btn.classList.toggle("hidden");
 });
 
+const dropArea2 = document.getElementById("drop-area-2");
+const fileInput2 = document.getElementById("fileInput-2");
+const submit_crop_image_btn = document.querySelector("#submit-image-btn-2");
+const loadingIndicator2 = document.getElementById("loadingIndicator-2");
+
+submit_crop_image_btn.addEventListener("click", async (event) => {
+  loadingIndicator.classList.toggle("hidden");
+  submit_crop_image_btn.classList.toggle("hidden");
+
+  // Get the selected image file
+  const selectedFile = fileInput2.files[0];
+
+  if (selectedFile) {
+    // Read the selected image file
+    const reader = new FileReader();
+    reader.onload = async (event) => {
+      const base64Image = event.target.result;
+
+      // Send the image for disease identification
+      const data = {
+        api_key: "kJ6BEPx2tSZC6v8cWl2s3BQmOOAKacqTrowSV0j3iLdtmQA5Rs",
+        images: [base64Image],
+        modifiers: ["crops_fast", "similar_images"],
+        language: "en",
+        disease_details: [
+          "cause",
+          "common_names",
+          "classification",
+          "description",
+          "treatment",
+          "url",
+        ],
+      };
+
+      try {
+        const response = await fetch(
+          "https://api.plant.id/v2/health_assessment",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          }
+        );
+
+        if (response.ok) {
+          const responseData = await response.json();
+          console.log("Disease identification response:", responseData);
+          // You can handle the disease identification results here
+          dropArea2.classList.toggle("hidden");
+          loadingIndicator.classList.toggle("hidden");
+          submit_image_btn.classList.toggle("hidden");
+          floatingActionBtn.style.display = "flex";
+          chatWrapperSection.classList.toggle("hidden");
+          inputWrapper.classList.toggle("hidden");
+
+          let message = ``;
+
+          // Extract details from health_assessment
+          const healthAssessment = responseData.health_assessment;
+          if (healthAssessment) {
+            const diseases = healthAssessment.diseases;
+            if (diseases && diseases.length > 0) {
+              message = "Detected Diseases:\n";
+
+              diseases.forEach((disease, index) => {
+                const diseaseName = disease.name;
+                const probability = disease.probability;
+                message += `${
+                  index + 1
+                }. ${diseaseName} (Probability: ${probability})\n`;
+
+                // Add more information as needed
+                const description = disease.disease_details.description;
+                const treatment = disease.disease_details.treatment;
+                message += `Description: ${description}\n`;
+
+                // Handle the treatment details
+                if (treatment) {
+                  const chemicalTreatment = treatment.chemical;
+                  const biologicalTreatment = treatment.biological;
+                  const prevention = treatment.prevention;
+
+                  if (chemicalTreatment) {
+                    message += `Chemical Treatment: ${chemicalTreatment.join(
+                      ", "
+                    )}\n`;
+                  }
+
+                  if (biologicalTreatment) {
+                    message += `Biological Treatment: ${biologicalTreatment.join(
+                      ", "
+                    )}\n`;
+                  }
+
+                  if (prevention) {
+                    message += `Prevention: ${prevention.join(", ")}\n`;
+                  }
+                }
+              });
+            }
+          }
+
+          form.elements.message.value = message;
+          form.dispatchEvent(new Event("submit"));
+          loadingIndicator.classList.toggle("hidden");
+          submit_image_btn.classList.toggle("hidden");
+        } else {
+          console.error("Error in disease identification:", response.status);
+          // Handle the error here
+        }
+      } catch (error) {
+        console.error("Error in disease identification:", error);
+        // Handle the error here
+      }
+    };
+
+    reader.readAsDataURL(selectedFile);
+  } else {
+    console.error("No image selected.");
+    // Handle the case where no image is selected
+  }
+
+  loadingIndicator.classList.toggle("hidden");
+  submit_crop_image_btn.classList.toggle("hidden");
+});
+
 // function to format the response from the bot
 function formatMessage(rawText) {
   const markdown = new markdownit();
