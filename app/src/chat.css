@@ -139,11 +139,27 @@ body {
   font-size: 20px;
 }
 .chat-history {
-  height: calc(100% - 90px);
+  height: calc(100% - 170px);
   padding: 5px 10px;
   padding-bottom: 40px;
   overflow-y: auto;
   /* background-color: #20c997; */
+}
+
+.sidebar-footer {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border-top: 1px solid #f2f3f5;
+}
+
+.sidebar-footer a {
+  text-decoration: none;
+  color: #34eb9e;
+  font-size: 15px;
 }
 
 .chats-wrapper {
@@ -768,5 +784,9 @@ div.right-panel img {
     border: 1px solid #20c997;
     outline: none;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  }
+
+  .top-history {
+    display: none;
   }
 }

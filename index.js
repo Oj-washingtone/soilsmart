@@ -48,6 +48,7 @@ app.use("/register", routes);
 app.use("/userreg", routes);
 app.use("/signin", routes);
 app.use("/save/bot/message", routes);
+app.use("/logout", routes);
 
 app.listen(port, () => {
   console.log(`Server is running on port http://localhost:${port}`);

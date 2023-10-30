@@ -195,4 +195,16 @@ router.post("/signin", passport.authenticate("local"), async (req, res) => {
   res.redirect("/chats?id=" + chat);
 });
 
+router.get("/logout", (req, res) => {
+  // Attempt to log the user out
+  req.logout(function (err) {
+    if (err) {
+      console.error("Error during logout:", err);
+      res.redirect("/login");
+    }
+    req.session.isLoggedIn = false;
+    res.redirect("/");
+  });
+});
+
 export default router;
