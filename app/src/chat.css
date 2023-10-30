@@ -163,11 +163,11 @@ body {
 }
 
 .chats-wrapper {
-  width: 90%;
+  width: 100%;
   background-color: #fff;
   height: calc(100% - 100px);
   overflow-y: auto;
-  padding: 0 20px;
+  padding: 0 5%;
   overflow-x: hidden;
   margin: 0 auto;
 }
@@ -788,5 +788,9 @@ div.right-panel img {
 
   .top-history {
     display: none;
+  }
+
+  .prev-chat-header {
+    padding: 10px 0;
   }
 }
