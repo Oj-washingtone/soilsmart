@@ -156,7 +156,7 @@ body {
   margin: 0 auto;
 }
 .chat-input-section {
-  width: 100%;
+  width: 90%;
   height: 100px;
   display: flex;
   flex-direction: row;
@@ -164,6 +164,7 @@ body {
   align-items: center;
   padding: 20px;
   background-color: #fff;
+  margin: 0 auto !important;
 }
 .input-wrapper {
   background-color: #fff;
@@ -176,6 +177,7 @@ body {
   outline: none;
   max-height: 50px !important;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  margin: auto;
 }
 form {
   width: 100%;
